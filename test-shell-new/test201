@@ -1,0 +1,29 @@
+#!/bin/sh
+echo "Test201: test ctrl-c"
+echo "sleep 10" > shell-in
+
+../shell < shell-in > shell-out &
+
+# Send ctrl-c to process
+sleep 1
+kill -INT $!
+sleep 1
+/bin/ps -e -o pid | grep $! > out 2>&1
+if [ $? -ne 0 ]
+then
+    echo "Test201 failed. No shell process"
+    exit -1
+fi
+
+#Make sure that shell has gone away
+kill -KILL $!
+sleep 1
+/bin/ps -e -o pid | grep $! > out 2>&1
+if [ $? -eq 0 ]
+then
+    echo "Test201 failed. Shell process still there"
+    exit -1
+fi
+echo Test1 OK
+exit 0
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test105: cd notfound >& err1" 
+echo "cd notfound >& err1" > shell-in
+echo "pwd" >> csh-in
+
+../shell < shell-in > shell-out 2>&1
+
+grep "No such file or directory" err1 
+if [ $? -ne 0 ]
+then
+    echo "Test105 failed"
+    exit -1
+fi
+echo Test105 OK
+exit 0

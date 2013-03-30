@@ -1,0 +1,20 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test14: Enviroment: delete variable"
+echo "setenv aaa pppp" > shell-in
+echo "printenv" >> shell-in
+echo "unsetenv aaa" >> shell-in
+echo "printenv" >> shell-in
+
+../shell < shell-in > shell-out
+
+res=`grep -c aaa= shell-out`
+if [ $res -ne 1 ]
+then
+    echo "Test14 failed. Variable not deleted"
+    exit -1
+fi
+
+echo Test14 OK
+exit 0

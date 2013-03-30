@@ -1,0 +1,32 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test3-3: ls notfound >& err "
+echo "/bin/ls notfound >& err1" > shell-in
+echo "/bin/ls notfound > err2 2>&1" > csh-in
+
+/bin/sh < csh-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff err1 err2
+if [ $? -ne 0 ]
+then
+    echo "Test3-3 failed >& err"
+    exit -1
+fi
+
+echo "ls notfound >>& err1" > shell-in
+echo "ls notfound >> err2 2>&1" > csh-in
+
+/bin/sh < csh-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff err1 err2
+if [ $? -ne 0 ]
+then
+    echo "Test3-3 failed >>& err"
+    exit -1
+fi
+
+echo Test3-3 OK
+exit 0

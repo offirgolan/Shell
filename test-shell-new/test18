@@ -1,0 +1,16 @@
+#!/bin/sh
+rm csh-out shell-out
+echo "Test18: Parsing: words and special characters"
+echo "ls|grep fil" > shell-in
+echo "ls|grep fil" > csh-in
+/bin/sh < csh-in > csh-out
+../shell < shell-in > shell-out
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test18 failed"
+    exit -1
+fi
+echo Test18 OK
+exit 0

@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "Test203: test subshell"
+
+echo "ls test3* > file-list " > shell-in
+echo "ls -al \`cat file-list\` " >> shell-in
+../shell < shell-in > shell-out
+
+echo "ls test3* > file-list" > csh-in
+echo "ls -al \`cat file-list\` " >> csh-in
+/bin/csh < csh-in > csh-out
+
+diff csh-out shell-out > /dev/null 2>&1
+if [ $? -ne 0 ]
+then
+    echo "Test203 failed. "
+    exit -1
+fi
+
+echo Test203 OK
+exit 0
+

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test12: Enviroment: Redirect printenv"
+echo "/usr/bin/printenv | grep PATH" > csh-in
+
+#Make sure that printenv is a built in command
+(
+PATH=/bin
+export PATH
+echo "printenv | grep PATH" > shell-in
+)
+
+../shell < shell-in > shell-out
+/bin/sh < csh-in > csh-out
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test12 failed"
+    exit -1
+fi
+echo Test12 OK
+exit 0

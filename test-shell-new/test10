@@ -1,0 +1,35 @@
+#!/bin/sh
+
+rm -f shell-out
+myname=`whoami`
+echo "Test10: Zombie processes"
+
+before=`/bin/ps -u $myname | grep -c defunc`
+echo "ls &" > shell-in
+echo "ls &" >> shell-in
+echo "ls &" >> shell-in
+echo "ls &" >> shell-in
+echo "ls &" >> shell-in
+echo "ls &" >> shell-in
+echo "ls &" >> shell-in
+echo "sleep 5" >> shell-in
+../shell < shell-in > shell-out &
+
+sleep 1
+
+grep test shell-out > out2 2>&1
+if [ $? -ne 0 ]
+then
+    echo "Test10 failed. Output incorrect."
+    exit -1
+fi
+
+after=`/bin/ps -u $myname | grep -c defunc`
+
+if [ $before -ne $after ]
+then
+    echo "Test10 failed. Zombie processes still around ($before, $after)"
+    exit -1
+fi
+echo Test10 OK
+exit 0

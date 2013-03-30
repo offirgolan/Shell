@@ -1,0 +1,24 @@
+
+Shell Project Testing Script
+----------------------------
+
+1. Make sure that your shell project does not print
+debug messages. The output will be compared with the one
+of csh and the extra debug messages will cause the output
+to be different.
+
+2. Only print the shell prompt if the input is a terminal.
+Use the function "isatty()" to know if the input is a terminal or not.
+Add the following code to your shell in the prompt procedure:
+
+if ( isatty(0) ) {
+  Print prompt
+}
+
+3. The test script assumes that your shell executable is called "shell"
+and "shell" is found one directory above the test directory.
+
+4. To run all tests type "testall". You may also run each test
+individually by typing test1 etc.
+
+Good luck!

@@ -1,0 +1,15 @@
+#!/bin/sh
+rm -f out1 out2
+rm -f csh-out shell-out
+echo "Test4: Multiple redirection"
+echo "ls > out1 > out2" > shell-in
+../shell < shell-in > shell-out 2>&1
+
+grep "Ambiguous output redirect" shell-out
+if [ $? -ne 0 ]
+then
+    echo "Test4 failed"
+    exit -1
+fi
+echo Test4 OK
+exit 0

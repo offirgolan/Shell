@@ -1,0 +1,4 @@
+	_arguments = (char **) malloc( _numberOfAvailableArguments * sizeof( char * ) );
+SimpleCommand::insertArgument( char * argument )
+		_arguments = (char **) realloc( _arguments,
+				  _numberOfAvailableArguments * sizeof( char * ) );

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test16: Enviroment: variable expansion"
+echo "setenv C ap" > shell-in
+echo "setenv D le" >> shell-in
+echo "echo I like \${C}p\${D}" >> shell-in
+
+../shell < shell-in > shell-out
+
+grep "I like apple" shell-out 
+if [ $? -ne 0 ]
+then
+    echo "Test16 failed"
+    exit -1
+fi
+echo Test16 OK
+exit 0

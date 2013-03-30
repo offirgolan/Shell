@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rm -f csh-out shell-out "hello world"
+
+echo "Test115: touch \"hello world\""
+echo "touch \"hello world\"" > shell-in
+echo "ls" >>  shell-in
+
+../shell < shell-in > shell-out 2>&1
+
+if [ ! -f "hello world" ]
+then
+    echo "Test115 failed"
+    exit -1
+fi
+echo Test115 OK
+exit 0

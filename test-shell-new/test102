@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test102: cd /etc; pwd"
+echo "cd /etc" > shell-in
+echo "pwd" >> shell-in 
+
+/bin/sh < shell-in > csh-out 2>&1 
+../shell < shell-in > shell-out 2>&1 
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test102 failed"
+    exit -1
+fi
+echo Test102 OK
+exit 0

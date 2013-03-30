@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test112: echo /etc/r*/*s* "
+echo "echo /etc/r*/*s*" > shell-in
+
+/bin/sh < shell-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test112 failed"
+    exit -1
+fi
+echo Test112 OK
+exit 0

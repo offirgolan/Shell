@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test109: echo /usr/lib/libt*"
+echo "echo /usr/lib/libt*" > shell-in
+echo "echo /usr/lib/libt*" > csh-in
+
+/bin/sh < csh-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test109 failed"
+    exit -1
+fi
+echo Test109 OK
+exit 0

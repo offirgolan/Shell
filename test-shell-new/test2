@@ -1,0 +1,16 @@
+#!/bin/sh
+echo "Test2: Test stdin redirection"
+echo "cat < files/aaa" > shell-in
+echo "cat < files/aaa" > csh-in
+/bin/sh < csh-in > csh-out
+../shell < shell-in > shell-out
+
+diff csh-out shell-out 
+if [ $? -ne 0 ]
+then
+  echo "Test2 failed"
+  exit -1
+fi
+echo Test2 OK
+exit 0
+

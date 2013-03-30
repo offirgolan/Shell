@@ -1,0 +1,16 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test116: Escape Chars"
+echo "echo lll\< kkkk\\\\\\ uuuu\&" > shell-in
+
+../shell < shell-in > shell-out 2>&1
+
+grep "lll< kkkk[\] uuuu&" shell-out 
+if [ $? -ne 0 ]
+then
+    echo "Test116 failed"
+    exit -1
+fi
+echo Test116 OK
+exit 0

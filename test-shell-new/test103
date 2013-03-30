@@ -1,0 +1,20 @@
+#!/bin/sh
+
+rm csh-out shell-out
+echo "Test103: cd pwd"
+echo "cd" > shell-in
+echo "pwd" >> shell-in 
+echo "cd" > csh-in
+echo "pwd" >> csh-in
+
+/bin/csh < csh-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test103 failed"
+    exit -1
+fi
+echo Test103 OK
+exit 0

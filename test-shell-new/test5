@@ -1,0 +1,16 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test5: 2 Pipes"
+echo "cat file1.cc | grep malloc" > shell-in
+/bin/sh < shell-in > csh-out
+../shell < shell-in > shell-out
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test5 failed"
+    exit -1
+fi
+echo Test5 OK
+exit 0

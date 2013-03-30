@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test13: Enviroment: replace variable"
+echo "setenv aaa bbbb" > shell-in
+echo "setenv aaa pppp" >> shell-in
+echo "printenv" >> shell-in
+
+../shell < shell-in > shell-out
+
+grep aaa=pppp shell-out > out 2>&1
+if [ $? -ne 0 ]
+then
+    echo "Test13 failed"
+    exit -1
+fi
+echo Test13 OK
+exit 0

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test9: Background"
+echo "sleep 5 &" > shell-in
+echo "touch bgfile" >> shell-in
+../shell < shell-in > shell-out &
+
+sleep 1
+if [ ! -f bgfile ]
+then
+    echo "Test9 failed"
+    exit -1
+fi
+echo Test9 OK
+exit 0

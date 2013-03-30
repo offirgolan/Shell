@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rm -f csh-out shell-out
+echo "Test112-2: echo /usr/lib/lib?.a"
+echo "echo /usr/lib/lib?.a" > shell-in
+
+/bin/sh < shell-in > csh-out 2>&1
+../shell < shell-in > shell-out 2>&1
+
+diff shell-out csh-out
+if [ $? -ne 0 ]
+then
+    echo "Test112-2 failed"
+    exit -1
+fi
+echo Test112-2 OK
+exit 0

@@ -1,0 +1,17 @@
+#!/bin/sh
+rm -f err1 err2
+rm -f csh-out shell-out
+echo "Test3: Error redirection"
+echo "ls /none >& err1" > shell-in
+echo "ls /none >err2 2>&1" > csh-in
+/bin/sh < csh-in > csh-out
+../shell < shell-in > shell-out
+
+diff err1 err2
+if [ $? -ne 0 ]
+then
+    echo "Test3 failed"
+    exit -1
+fi
+echo Test3 OK
+exit 0

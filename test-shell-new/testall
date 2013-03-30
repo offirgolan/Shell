@@ -1,0 +1,117 @@
+#!/bin/sh
+
+grade1=0
+grade1max=15
+echo "---IO Redirection---- ($grade1max pts)"
+./test1 && grade1=`expr $grade1 "+" 3`
+./test2 && grade1=`expr $grade1 "+" 3`
+./test3 && grade1=`expr $grade1 "+" 3`
+./test3-2 && grade1=`expr $grade1 "+" 2`
+./test3-3 && grade1=`expr $grade1 "+" 2`
+./test4 && grade1=`expr $grade1 "+" 2`
+
+grade2=0
+grade2max=15
+echo "--- Pipes ----------- ($grade2max pts)"
+./test5 && grade2=`expr $grade2 "+" 4`
+./test6 && grade2=`expr $grade2 "+" 4`
+./test7 && grade2=`expr $grade2 "+" 4`
+./test8 && grade2=`expr $grade2 "+" 3`
+
+grade3=0
+grade3max=5
+echo "--- Background and Zombie Processes --- ($grade3max pts)"
+./test9 && grade3=`expr $grade3 "+" 3`
+./test10 && grade3=`expr $grade3 "+" 2`
+
+grade4=0
+grade4max=10
+echo "--- Environment ----- ($grade4max pts)"
+./test11 && grade4=`expr $grade4 "+" 1`
+./test12 && grade4=`expr $grade4 "+" 2`
+./test13 && grade4=`expr $grade4 "+" 2`
+./test14 && grade4=`expr $grade4 "+" 2`
+./test15 && grade4=`expr $grade4 "+" 2`
+./test16 && grade4=`expr $grade4 "+" 1`
+
+grade5=0
+grade5max=2
+echo "--- Words and special characters --- ($grade5max pts)"
+./test17 && grade5=`expr $grade5 "+" 1`
+./test18 && grade5=`expr $grade5 "+" 1`
+
+grade6=0
+grade6max=5
+echo "--- cd --- ($grade6max pts)"
+./test102 && grade6=`expr $grade6 "+" 1`
+./test103 && grade6=`expr $grade6 "+" 1`
+./test104 && grade6=`expr $grade6 "+" 1`
+./test105 && grade6=`expr $grade6 "+" 1`
+./test106 && grade6=`expr $grade6 "+" 1`
+
+grade7=0
+grade7max=14
+echo "--- Wildcarding --- ($grade7max pts)"
+./test107 && grade7=`expr $grade7 "+" 2`
+./test108 && grade7=`expr $grade7 "+" 1`
+./test109 && grade7=`expr $grade7 "+" 1`
+./test110 && grade7=`expr $grade7 "+" 2`
+./test111 && grade7=`expr $grade7 "+" 2`
+./test112 && grade7=`expr $grade7 "+" 4`
+./test112-2 && grade7=`expr $grade7 "+" 2`
+
+grade8=0
+grade8max=5
+echo "--- Quotes and escape chars --- ($grade8max pts)"
+./test113 && grade8=`expr $grade8 "+" 1`
+./test114 && grade8=`expr $grade8 "+" 1`
+./test115 && grade8=`expr $grade8 "+" 1`
+./test116 && grade8=`expr $grade8 "+" 2`
+
+grade9=0
+grade9max=5
+echo "--- Ctrl-C --- ($grade9max pts)"
+./test201 && grade9=`expr $grade9 "+" 5`
+
+grade10=0
+grade10max=10
+echo "--- Robustness -- ($grade10max pts)"
+./test202 && grade10=`expr $grade10 "+" 10`
+
+
+grade12=0
+grade12max=4
+echo "--- tilde expansion -- ($grade12max pts)"
+./test204 && grade12=`expr $grade12 "+" 4`
+
+grade11=0
+grade11max=10
+echo "--- subshell -- ($grade11max pts)"
+./test203 && grade11=`expr $grade11 "+" 10`
+
+total=`expr $grade1 + $grade2 + $grade3 + $grade4 + $grade5 + \
+            $grade6 + $grade7 + $grade8 + $grade9 + $grade10 + \
+	    $grade11 + $grade12`
+
+totalmax=`expr $grade1max + $grade2max + $grade3max + $grade4max \
+            + $grade5max + $grade6max + $grade7max + $grade8max \
+            + $grade9max + $grade10max + $grade11max + $grade12max`
+
+echo   "-------------------------------------------------"
+echo   "User:  $1 "
+echo   "-------------------------------------------------"
+printf "IO Redirection:          %-3d%s%-3d\n" $grade1 " of " $grade1max
+printf "Pipes:                   %-3d%s%-3d\n" $grade2 " of " $grade2max
+printf "Background and Zombie:   %-3d%s%-3d\n" $grade3 " of " $grade3max
+printf "Environment:             %-3d%s%-3d\n" $grade4 " of " $grade4max
+printf "Words and special chars: %-3d%s%-3d\n" $grade5 " of " $grade5max
+printf "cd:                      %-3d%s%-3d\n" $grade6 " of " $grade6max
+printf "Wildcarding:             %-3d%s%-3d\n" $grade7 " of " $grade7max
+printf "Quotes and escape chars: %-3d%s%-3d\n" $grade8 " of " $grade8max
+printf "Ctrl-C:                  %-3d%s%-3d\n" $grade9 " of " $grade9max
+printf "Robustness:              %-3d%s%-3d\n" $grade10 " of " $grade10max
+printf "subshell:                %-3d%s%-3d\n" $grade11 " of " $grade11max
+printf "tilde expansion:         %-3d%s%-3d\n" $grade12 " of " $grade12max
+echo   "--------------------------------------------------"
+printf "Total:                   %-3d%s%-3d\n" $total " of " $totalmax
+

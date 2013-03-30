@@ -1,0 +1,16 @@
+#!/bin/sh
+rm -f out1 out2 csh-out shell-out
+echo "Test17: Parsing: words and special characters"
+echo "ls file1.cc>out1" > shell-in
+echo "ls file1.cc>out2" > csh-in
+/bin/sh < csh-in > csh-out
+../shell < shell-in > shell-out
+
+diff out1 out2
+if [ $? -ne 0 ]
+then
+    echo "Test17 failed"
+    exit -1
+fi
+echo Test17 OK
+exit 0

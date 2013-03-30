@@ -1,0 +1,17 @@
+#!/bin/sh
+
+rm -f shell-out
+echo "Test11: Enviroment: Set variable"
+echo "setenv aaa bbbb" > shell-in
+echo "printenv" >> shell-in
+
+../shell < shell-in > shell-out
+
+grep aaa=bbbb shell-out > out 2>&1
+if [ $? -ne 0 ]
+then
+    echo "Test11 failed"
+    exit -1
+fi
+echo Test11 OK
+exit 0
